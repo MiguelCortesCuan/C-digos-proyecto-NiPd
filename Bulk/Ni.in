@@ -1,0 +1,59 @@
+&CONTROL
+  title           = 'Ni_UC-vcrelax'
+  prefix          = 'Ni_UC'
+  outdir          = './SAVE',
+  restart_mode    = 'from_scratch',
+  etot_conv_thr   =  2.94d-06,
+  forc_conv_thr   =  7.80d-04,
+  verbosity       =  high,
+  calculation     = 'vc-relax',
+  pseudo_dir      = '/tmpu/isholek_g/isholek/MIGUEL/PP'
+/
+
+&SYSTEM
+    a                         =  3.441
+    degauss                   =  0.0146997171
+    ibrav                     =  1
+    nat                       =  4
+    nspin                     =  2
+    ntyp                      =  1
+    occupations               = "smearing"
+    smearing                  = "mv"
+    starting_magnetization(1) =  0.65
+    vdw_corr                  =  "DFT-D3"
+    dftd3_version             =  6
+    ecutrho                   =  480
+    ecutwfc                   =  60
+    input_dft                 = 'PBE'
+/
+
+&ELECTRONS
+    conv_thr         = 1.0d-10
+    diagonalization  = "david"
+    electron_maxstep = 201
+    mixing_beta      = 0.2
+    mixing_mode      = "local-TF"
+    mixing_ndim      = 12
+/
+
+&IONS
+    ion_dynamics = "bfgs"
+/
+
+&CELL
+    cell_dofree    = "ibrav"
+    cell_dynamics  = "bfgs"
+    press_conv_thr =  2.00000e-01
+/
+
+K_POINTS {automatic}
+ 20  20  20  0 0 0
+
+ATOMIC_SPECIES
+Ni   58.69340   Ni.upf
+
+ATOMIC_POSITIONS (angstrom)
+Ni              -0.0119281328       -0.0119281328       -0.0119281328
+Ni               1.7085818226        1.7085818226       -0.0119247769
+Ni               1.7085818226       -0.0119247769        1.7085818226
+Ni              -0.0119247769        1.7085818226        1.7085818226

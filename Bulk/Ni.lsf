@@ -1,0 +1,36 @@
+#!/bin/bash
+#BSUB -L /bin/bash
+#BSUB -J Ni
+#BSUB -q q_hpc
+#BSUB -n 64
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -R "span[ptile=16]"
+#
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OMP_DYNAMIC=false
+export MKL_DYNAMIC=false
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+export I_MPI_PIN=1
+export I_MPI_PIN_DOMAIN=core
+export I_MPI_FABRICS=shm:ofi
+export I_MPI_DEBUG=0
+
+# Definir el nombre del material y número de núcleos
+material="Ni"
+
+    # Execute Quantum Espresso
+mpirun -np 64 pw.x -npool 64 -ndiag 1 -nb 1 -ntg 1 -in ${material}.in > ${material}.out
+
+
+
