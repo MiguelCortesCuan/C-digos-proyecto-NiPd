@@ -1,0 +1,99 @@
+#!/bin/bash
+#BSUB -J Ni_ecut
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -q q_hpc
+#BSUB -n 30
+#BSUB -R "span[hosts=1]"
+#BSUB -B
+#BSUB -N
+#BSUB -u ccuan@pceim.unam.mx
+#
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+# Definir el nombre del material y número de núcleos
+material="Ni_ecut"
+cores="30"
+pseudo_dir="/tmpu/mdach_g/mdach/PP"
+
+######## Generación de archivos de entrada y ejecución de cálculos #########
+
+for variable in $(seq 50 1 70)  ### Aquí se cambia el tamaño de paso de la variable a modificar (ecut, lattice o kpoints) ###
+do
+    ecut=$variable  ### Aquí se cambia la variable a modificar (ecut, lattice o kpoints) ###
+
+    cat > ${material}_${variable}.in << EOF
+&CONTROL
+    title         = "${material}_${variable}"
+    calculation   = "scf"
+    max_seconds   = 8.64000e+99
+    etot_conv_thr = 7.4d-8
+    forc_conv_thr = 7.8d-4
+    nstep         = 512
+    pseudo_dir    = "${pseudo_dir}"
+    prefix        = "${material}_${variable}"
+    outdir        = '.'
+    restart_mode  = 'from_scratch'
+/
+
+&SYSTEM
+    celldm(1)                 =  6.50254759
+    constrained_magnetization = "none"
+    degauss                   =  0.0146997171
+    ibrav                     =  0
+    nat                       =  4
+    nspin                     =  2
+    ntyp                      =  1
+    occupations               = "smearing"
+    smearing                  = "methfessel-paxton"
+    starting_magnetization(1) =  2.00000e-01
+    vdw_corr                  =  "DFT-D3"
+    dftd3_version             =  6
+    input_dft                 = 'PBE'
+    ecutrho                   =  $((8 * ecut))
+    ecutwfc                   =  ${ecut}
+/
+
+&ELECTRONS
+    conv_thr         =  6.40000e-10
+    diago_david_ndim = 12
+    diagonalization  = "david"
+    electron_maxstep = 512
+    mixing_beta      =  0.5
+    mixing_mode      = "local-TF"
+    mixing_ndim      = 10
+    startingpot      = "atomic"
+    startingwfc      = "atomic"
+/
+
+K_POINTS {automatic}
+  20 20 20  0 0 0
+
+ATOMIC_SPECIES
+Ni     58.69340  Ni.upf
+
+CELL_PARAMETERS (alat)
+   0.999940917   0.000000000   0.000000000
+   0.000000000   0.999940917   0.000000000
+   0.000000000   0.000000000   0.999940917
+
+ATOMIC_POSITIONS (angstrom)
+Ni              -0.0119243811       -0.0119243811       -0.0119243811
+Ni               1.7084782649        1.7084782649       -0.0119219004
+Ni               1.7084782649       -0.0119219004        1.7084782649
+Ni              -0.0119219004        1.7084782649        1.7084782649
+EOF
+
+    ####### Comando para correr Quantum Espresso #######
+    mpirun -np $cores pw.x < ${material}_${variable}.in > ${material}_${variable}.out
+
+    ####### Se recoge el dato de la energía total #######
+    awk '/!/ { print '$variable', $5 }' ${material}_${variable}.out >> kpoints.dat
+
+done

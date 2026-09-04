@@ -1,0 +1,281 @@
+#!/bin/bash
+#BSUB -J H2O
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -q q_hpc
+#BSUB -n 16
+#BSUB -R "span[ptile=16]"
+#BSUB -B
+#BSUB -N
+#BSUB -u ccuan@pceim.unam.mx
+#
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OMP_DYNAMIC=false
+export MKL_DYNAMIC=false
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+export I_MPI_PIN=1
+export I_MPI_PIN_DOMAIN=core
+export I_MPI_FABRICS=shm:ofi
+export I_MPI_DEBUG=0
+
+material="H2O"
+pseudo_dir="/tmpu/isholek_g/isholek/MIGUEL/PP"
+variable="1"
+NAME="${material}_${variable}"
+NP=16
+OUTDIR="./SAVE"
+
+    cat > ${material}_${variable}-relax.in << EOF
+&CONTROL
+  title         = '${material}_${variable}',
+  calculation   = 'relax',
+  outdir        = './SAVE',
+  pseudo_dir    = '${pseudo_dir}',
+  prefix        = '${material}_${variable}',
+  tstress       = .true.,
+  tprnfor       = .true.,
+  etot_conv_thr = 1.7639675d-06,
+  forc_conv_thr = 7.78d-4,
+/
+
+&SYSTEM
+  ibrav              = 1,
+  a                  = 20.0,
+  nat                = 3,
+  ntyp               = 2,
+  input_dft          = 'PBE',
+  assume_isolated    = 'martyna-tuckerman',
+  ecutwfc            = 60.0,
+  ecutrho            = 480.0,
+  occupations        = 'fixed',
+  vdw_corr           = 'DFT-D3',
+  dftd3_version      = 6,
+/
+
+&ELECTRONS
+  conv_thr        = 6.4d-9
+  mixing_mode     = 'plain'
+  mixing_beta     = 0.30
+  mixing_ndim     = 12
+  diagonalization = 'david'
+  electron_maxstep = 200
+/
+
+&IONS
+/
+
+K_POINTS {automatic}
+ 1 1 1  0 0 0
+
+ATOMIC_SPECIES
+O      15.99940  O.upf
+H       1.00794  H.upf
+
+ATOMIC_POSITIONS (bohr)
+O               16.7386918921       21.3859257126       19.0476326159
+H               18.0084092445       20.0732998479       18.8673712503
+H               15.1611018634       20.4679754395       19.2381881339
+EOF
+
+# Execute Quantum Espresso
+    mpirun -np $NP pw.x -inp ${material}_${variable}-relax.in > ${material}_${variable}-relax.out
+
+    cat > ${material}_${variable}-SCF.in << EOF
+&CONTROL
+  title         = '${material}_${variable}-SCF',
+  calculation   = 'scf',
+  outdir        = './SAVE',
+  pseudo_dir    = '${pseudo_dir}',
+  prefix        = '${material}_${variable}',
+  tstress       = .true.,
+  tprnfor       = .true.,
+  verbosity     = 'high'
+  restart_mode  = 'restart'
+/
+
+&SYSTEM
+  ibrav              = 1,
+  a                  = 20.0,
+  nat                = 3,
+  ntyp               = 2,
+  input_dft          = 'PBE',
+  assume_isolated    = 'martyna-tuckerman',
+  ecutwfc            = 60.0,
+  ecutrho            = 480.0,
+  occupations        = 'fixed',
+  vdw_corr           = 'DFT-D3',
+  dftd3_version      = 6,
+/
+
+&ELECTRONS
+  conv_thr        = 1.0d-10
+  mixing_mode     = 'plain'
+  mixing_beta     = 0.30
+  mixing_ndim     = 12
+  diagonalization = 'david'
+  electron_maxstep = 200
+/
+
+K_POINTS {automatic}
+ 1 1 1  0 0 0
+
+ATOMIC_SPECIES
+O      15.99940  O.upf
+H       1.00794  H.upf
+
+ATOMIC_POSITIONS (bohr)
+O               16.7386918921       21.3859257126       19.0476326159
+H               18.0084092445       20.0732998479       18.8673712503
+H               15.1611018634       20.4679754395       19.2381881339
+EOF
+
+# Execute Quantum Espresso
+    mpirun -np 16 pw.x -inp ${material}_${variable}-SCF.in > ${material}_${variable}-SCF.out
+
+    cat > ${material}_${variable}-NSCF.in << EOF
+&CONTROL
+  title         = '${material}_${variable}-NSCF',
+  calculation   = 'nscf',
+  outdir        = './SAVE',
+  pseudo_dir    = '${pseudo_dir}',
+  prefix        = '${material}_${variable}',
+  tstress       = .true.,
+  tprnfor       = .true.,
+  verbosity     = 'high'
+  restart_mode  = 'restart'
+/
+
+&SYSTEM
+  ibrav              = 1,
+  a                  = 20.0,
+  nat                = 3,
+  ntyp               = 2,
+  input_dft          = 'PBE',
+  assume_isolated    = 'martyna-tuckerman',
+  ecutwfc            = 60.0,
+  ecutrho            = 480.0,
+  occupations        = 'fixed',
+  vdw_corr           = 'DFT-D3',
+  dftd3_version      = 6,
+/
+
+&ELECTRONS
+  conv_thr        = 1.0d-10
+  mixing_mode     = 'plain'
+  mixing_beta     = 0.30
+  mixing_ndim     = 12
+  diagonalization = 'david'
+  electron_maxstep = 200
+/
+
+K_POINTS {automatic}
+ 1 1 1  0 0 0
+
+ATOMIC_SPECIES
+O      15.99940  O.upf
+H       1.00794  H.upf
+
+ATOMIC_POSITIONS (bohr)
+O               16.7386918921       21.3859257126       19.0476326159
+H               18.0084092445       20.0732998479       18.8673712503
+H               15.1611018634       20.4679754395       19.2381881339
+EOF
+
+# Execute Quantum Espresso
+    mpirun -np $NP pw.x -inp ${material}_${variable}-NSCF.in > ${material}_${variable}-NSCF.out
+
+# ---------- ph.x (Γ point) ----------
+cat > ${NAME}-ph.in <<EOF
+${NAME}-ph
+&INPUTPH
+  prefix    = '${NAME}',
+  outdir    = '${OUTDIR}',
+  tr2_ph    = 1.0d-14,
+  fildyn    = '${NAME}.dyn',
+  verbosity = 'high',
+  trans     = .true.
+/
+0.0 0.0 0.0
+EOF
+
+# ---------- dynmat.x (read Γ dynamical matrix) ----------
+# This extracts Γ-point frequencies/eigenvectors from the .dyn file.
+cat > ${NAME}-dynmat.in <<EOF
+&INPUT
+  fildyn = '${NAME}.dyn',
+  asr    = 'simple',
+  q(1)=0.0, q(2)=0.0, q(3)=0.0,
+  filout = '${NAME}-dynmat.modes'
+/
+EOF
+
+# ---------- (optional) q2r.x ----------
+# Only meaningful if ph.x was run on a full q-grid (ldisp=.true., nq1/2/3),
+# which produces multiple ${NAME}.dyn* files. We guard the run below.
+cat > ${NAME}-q2r.in <<EOF
+&INPUT
+  fildyn = '${NAME}.dyn',
+  flfrc  = '${NAME}.fc',
+  zasr   = 'simple'
+/
+EOF
+
+# ---------- (optional) matdyn.x from IFCs (if you used q-grid) ----------
+# Uncomment if you did a q-grid with ph.x and want DOS/thermo etc.
+# cat > ${NAME}-matdyn.in <<EOF
+# &INPUT
+#   asr   = 'simple',
+#   flfrc = '${NAME}.fc',
+#   dos   = .true.,
+#   fldos = '${NAME}-phdos',
+#   nk1=16, nk2=16, nk3=1
+# /
+# EOF
+
+# ---------- electronic DOS/PDOS (unchanged) ----------
+cat > ${NAME}-dos.in <<EOF
+&DOS
+  prefix = '${NAME}',
+  outdir = '${OUTDIR}',
+  fildos = '${NAME}.dos',
+  DeltaE = 0.005
+/
+EOF
+
+cat > ${NAME}-pdos.in <<EOF
+&PROJWFC
+  prefix  = '${NAME}',
+  outdir  = '${OUTDIR}',
+  DeltaE  = 0.005,
+  filpdos = '${NAME}'
+/
+EOF
+
+# ---------- Workflow ----------
+set -euo pipefail
+
+#mpirun -np $NP pw.x -nk 6  -ndiag 4 -in "${NAME}-relax.in" > "${NAME}-relax.out" && \
+#mpirun -np $NP pw.x -nk 12 -ndiag 4 -in "${NAME}-SCF.in"   > "${NAME}-SCF.out"   && \
+#mpirun -np $NP pw.x -nk 24 -ndiag 1 -in "${NAME}-NSCF.in"  > "${NAME}-NSCF.out"  && \
+mpirun -np 1 dos.x     -in "${NAME}-dos.in"   > "${NAME}-dos.out"   && \
+mpirun -np 1 projwfc.x -in "${NAME}-pdos.in"  > "${NAME}-pdos.out"  && \
+mpirun -np $NP ph.x -in "${NAME}-ph.in"                    > "${NAME}-ph.out"    && \
+mpirun -np 1  dynmat.x -in "${NAME}-dynmat.in"             > "${NAME}-dynmat.out" && \
+{ ndyn=$(ls ${NAME}.dyn* 2>/dev/null | wc -l); \
+  if [ "$ndyn" -gt 1 ]; then \
+    mpirun -np 1 q2r.x -in "${NAME}-q2r.in"  > "${NAME}-q2r.out"; \
+    # mpirun -np 1 matdyn.x -in "${NAME}-matdyn.in" > "${NAME}-matdyn.out"; \
+  else \
+    echo "[INFO] q2r.x skipped: only one dynamical matrix (Γ-only)."; \
+  fi; \
+}

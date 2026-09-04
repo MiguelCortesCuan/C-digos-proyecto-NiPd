@@ -1,0 +1,6 @@
+&DOS
+  prefix = 'Ni3Pd1_111',
+  outdir = '/tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/SAVE',
+  fildos = '/tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/DOS/Ni3Pd1_111.dos',
+  DeltaE = 0.01,
+/

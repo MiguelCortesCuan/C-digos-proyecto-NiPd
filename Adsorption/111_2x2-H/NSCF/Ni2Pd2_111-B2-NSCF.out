@@ -1,0 +1,324 @@
+
+     Program PWSCF v.7.3 starts on  1May2026 at 13:46:19 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    64 processors
+
+     MPI processes distributed on     4 nodes
+     234616 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from /tmpu/isholek_g/isholek/MIGUEL/QE/Hydrogen/111_2x2/NSCF/Ni2Pd2_111-B2-NSCF.in
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+     file Ni.upf: wavefunction(s)  4S 3D renormalized
+     file Pd.upf: wavefunction(s)  5S 4D renormalized
+     file H.upf: wavefunction(s)  1S renormalized
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+
+     Atomic positions and unit cell read from directory:
+     /tmpu/isholek_g/isholek/MIGUEL/QE/Hydrogen/111_2x2/SAVE/Ni2Pd2_111-B2.save/
+ 
+ 
+     K-points division:     npool     =       8
+     R & G space division:  proc/nbgrp/npool/nimage =       8
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     one sub-group per band group will be used
+     scalapack distributed-memory algorithm (size of sub-group:  2*  2 procs)
+
+ 
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min         395     197     56               113792    40212    6294
+     Max         396     199     57               113804    40221    6321
+     Sum        3165    1581    455               910393   321727   50521
+ 
+     Using Slab Decomposition
+ 
+
+     Title: 
+     Ni2Pd2_111-B2-NSCF                                                         
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =       9.7088  a.u.
+     unit-cell volume          =    5128.0588 (a.u.)^3
+     number of atoms/cell      =           25
+     number of atomic types    =            3
+     number of electrons       =       241.00
+     number of Kohn-Sham states=          145
+     kinetic-energy cutoff     =      60.0000  Ry
+     charge density cutoff     =     480.0000  Ry
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+
+     celldm(1)=   9.708762  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.531889   0.883670   0.000000 )  
+               a(3) = (   0.000000   0.000000   6.341200 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000 -0.601910  0.000000 )  
+               b(2) = (  0.000000  1.131644  0.000000 )  
+               b(3) = (  0.000000  0.000000  0.157699 )  
+
+
+     PseudoPot. # 1 for Ni read from file:
+     /tmpu/isholek_g/isholek/MIGUEL/PP/PAW/Ni.upf
+     MD5 check sum: d88365a95a5e142bd87181c2c8b16588
+     Pseudo is Projector augmented-wave + core cor, Zval = 10.0
+     Generated using "atomic" code by A. Dal Corso  v.5.0.2 svn rev. 9415
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1195 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 2 for Pd read from file:
+     /tmpu/isholek_g/isholek/MIGUEL/PP/PAW/Pd.upf
+     MD5 check sum: e9d6f14fd83b79f8105499163af174c9
+     Pseudo is Projector augmented-wave + core cor, Zval = 10.0
+     Generated using "atomic" code by A. Dal Corso  v.5.0.2 svn rev. 9415
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1235 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 3 for H  read from file:
+     /tmpu/isholek_g/isholek/MIGUEL/PP/PAW/H.upf
+     MD5 check sum: 4cbe42a24e15140179a93d5bf84f2220
+     Pseudo is Projector augmented-wave, Zval =  1.0
+     Generated using "atomic" code by A. Dal Corso  v.5.0.2 svn rev. 9415
+     Shape of augmentation charge: PSQ
+     Using radial grid of  929 points,  2 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+     Q(r) pseudized with 0 coefficients 
+
+
+     atomic species   valence    mass     pseudopotential
+     Ni               10.00    58.69340     Ni( 1.00)
+     Pd               10.00   106.42000     Pd( 1.00)
+     H                 1.00     1.00794     H ( 1.00)
+
+     Starting magnetic structure 
+     atomic species   magnetization
+     Ni              0.650
+     Pd              0.100
+     H               0.000
+
+     No symmetry found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        Ni     tau(   1) = (   0.0000000   0.0000000   2.1410544  )
+         2        Pd     tau(   2) = (   0.7659447   0.4418349   2.1410544  )
+         3        Pd     tau(   3) = (   0.5000000   0.0000000   2.1410544  )
+         4        Ni     tau(   4) = (   0.2659447   0.4418349   2.1410544  )
+         5        Pd     tau(   5) = (   0.2340553   0.1600746   2.5528726  )
+         6        Pd     tau(   6) = (   0.5000000   0.6019096   2.5528726  )
+         7        Ni     tau(   7) = (   0.7340553   0.1600746   2.5528726  )
+         8        Ni     tau(   8) = (   1.0000000   0.6019096   2.5528726  )
+         9        Ni     tau(   9) = (   0.4678181   0.3203254   2.9643992  )
+        10        Ni     tau(  10) = (   0.7339778   0.7620308   2.9636992  )
+        11        Pd     tau(  11) = (   0.9673120   0.3205103   2.9625472  )
+        12        Pd     tau(  12) = (   1.2333624   0.7625210   2.9625472  )
+        13        Ni     tau(  13) = (   0.9375830   0.0375693   3.3730336  )
+        14        Pd     tau(  14) = (   0.7047547   0.4790241   3.3770248  )
+        15        Pd     tau(  15) = (   0.4384933   0.0366631   3.3770248  )
+        16        Ni     tau(  16) = (   1.2042966   0.4789415   3.3722032  )
+        17        Ni     tau(  17) = (   0.9343344   0.6414343   3.7932033  )
+        18        Pd     tau(  18) = (   0.1644238   0.2011866   3.7822119  )
+        19        Pd     tau(  19) = (   0.4310754   0.6441960   3.7822120  )
+        20        Ni     tau(  20) = (   0.6667737   0.2005721   3.7928863  )
+        21        Pd     tau(  21) = (   0.9049098   0.3550079   4.2137025  )
+        22        Ni     tau(  22) = (   0.6776167   0.7959551   4.1893195  )
+        23        Ni     tau(  23) = (   0.4107197   0.3546935   4.1861437  )
+        24        Pd     tau(  24) = (   1.1736668   0.8015153   4.2137024  )
+        25        H      tau(  25) = (   1.0354370   0.5805797   4.4276940  )
+
+     --------------------------------------------
+     DFT-D3 Dispersion Correction (3-body terms):
+     --------------------------------------------
+       Reference C6 values for interpolation: 
+
+         atom   Coordination number   C6
+         H          0.912             6.05
+         H          0.000            15.18
+         Ni         0.000          1149.49
+         Ni         1.794           356.66
+         Ni         6.546           257.56
+         Ni         6.292           283.75
+         Pd         0.000          1217.01
+         Pd         1.863           573.90
+         Pd         5.710           531.75
+
+       Values used:
+
+         atom   Coordination number  R0_AB[au]  C6      C8
+         Ni         6.134            3.162    273.94  22954.51
+         Pd         7.162            3.168    531.75  48720.73
+         Pd         7.162            3.168    531.75  48720.73
+         Ni         6.134            3.162    273.94  22954.52
+         Pd         9.632            3.168    531.75  48720.73
+         Pd         9.632            3.168    531.75  48720.73
+         Ni         8.228            3.162    258.17  21632.72
+         Ni         8.232            3.162    258.16  21632.31
+         Ni         8.235            3.162    258.16  21632.00
+         Ni         8.229            3.162    258.17  21632.56
+         Pd         9.667            3.168    531.75  48720.73
+         Pd         9.667            3.168    531.75  48720.73
+         Ni         8.217            3.162    258.18  21633.78
+         Pd         9.587            3.168    531.75  48720.73
+         Pd         9.587            3.168    531.75  48720.73
+         Ni         8.220            3.162    258.18  21633.44
+         Ni         8.119            3.162    258.31  21644.88
+         Pd         9.602            3.168    531.75  48720.73
+         Pd         9.602            3.168    531.75  48720.73
+         Ni         8.174            3.162    258.24  21638.37
+         Pd         7.715            3.168    531.75  48720.73
+         Ni         6.285            3.162    272.00  22791.31
+         Ni         6.325            3.162    271.47  22747.36
+         Pd         7.715            3.168    531.75  48720.73
+         H          1.570            2.062      6.06     73.20
+
+         Molecular C6 ( Ry / a.u.^6 ) =    224332.54
+
+
+     number of k points=   400  Marzari-Vanderbilt smearing, width (Ry)=  0.0147
+
+     Number of k-points >= 100: set verbosity='high' to print them.
+
+     Dense  grid:   910393 G-vectors     FFT dimensions: (  72,  72, 432)
+
+     Smooth grid:   321727 G-vectors     FFT dimensions: (  48,  50, 320)
+
+     Estimated max dynamical RAM per process >     173.43 MB
+
+     Estimated total dynamical RAM >      10.84 GB
+ ----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D
+  The code is running with the 2D cutoff
+  Please refer to:
+  Sohier, T., Calandra, M., & Mauri, F. (2017), 
+  Density functional perturbation theory for gated two-dimensional heterostructu
+ res:
+  Theoretical developments and application to flexural phonons in graphene.
+  Physical Review B, 96(7), 75448. https://doi.org/10.1103/PhysRevB.96.075448
+ ----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D
+
+     Check: negative core charge=   -0.000002
+     Generating pointlists ...
+     new r_m :   0.1984 (alat units)  1.9259 (a.u.) for type    1
+     new r_m :   0.1391 (alat units)  1.3505 (a.u.) for type    2
+     new r_m :   0.1391 (alat units)  1.3505 (a.u.) for type    3
+
+     The potential is recalculated from file :
+     /tmpu/isholek_g/isholek/MIGUEL/QE/Hydrogen/111_2x2/SAVE/Ni2Pd2_111-B2.save/charge-density
+
+
+     negative rho (up, down):  2.070E-04 1.594E-04
+     Starting wfcs are  217 randomized atomic wfcs
+     Checking if some PAW data can be deallocated... 
+
+     Band Structure Calculation
+     Davidson diagonalization with overlap
+     c_bands:  1 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
+
+     ethr =  1.00E-13,  avg # of iterations =104.3
+
+     total cpu time spent up to now is    35279.1 secs
+
+     End of band structure calculation
+
+     Number of k-points >= 100: set verbosity='high' to print the bands.
+
+     the Fermi energy is    -5.1173 ev
+     (compare with:    -5.1171 eV, computed in scf)
+
+     Writing all to output data dir /tmpu/isholek_g/isholek/MIGUEL/QE/Hydrogen/111_2x2/SAVE/Ni2Pd2_111-B2.save/ :
+     XML data file, pseudopotentials, collected wavefunctions
+ 
+     init_run     :      2.34s CPU      5.02s WALL (       1 calls)
+     electrons    :  17245.68s CPU  35186.06s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      0.00s CPU      0.01s WALL (       1 calls)
+     potinit      :      1.04s CPU      2.29s WALL (       1 calls)
+     hinit0       :      0.62s CPU      1.28s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :  17245.47s CPU  35185.59s WALL (       1 calls)
+     v_of_rho     :      0.49s CPU      1.05s WALL (       1 calls)
+     newd         :      0.16s CPU      0.34s WALL (       1 calls)
+     PAW_pot      :      0.31s CPU      0.63s WALL (       1 calls)
+
+     Called by c_bands:
+     init_us_2    :      1.77s CPU      2.65s WALL (     100 calls)
+     init_us_2:cp :      1.77s CPU      2.62s WALL (     100 calls)
+     cegterg      :  16856.87s CPU  34385.76s WALL (     524 calls)
+
+     Called by *egterg:
+     cdiaghg      :    988.57s CPU   1987.57s WALL (    9694 calls)
+     h_psi        :  12774.74s CPU  26133.30s WALL (   10218 calls)
+     s_psi        :    552.65s CPU   1115.94s WALL (   10218 calls)
+     g_psi        :     28.40s CPU     58.86s WALL (    9594 calls)
+
+     Called by h_psi:
+     h_psi:calbec :    661.89s CPU   1335.48s WALL (   10218 calls)
+     vloc_psi     :  11530.42s CPU  23625.43s WALL (   10218 calls)
+     add_vuspsi   :    558.12s CPU   1117.55s WALL (   10218 calls)
+
+     General routines
+     calbec       :    661.81s CPU   1335.40s WALL (   10218 calls)
+     fft          :      0.33s CPU      0.74s WALL (      23 calls)
+     ffts         :      0.02s CPU      0.04s WALL (       2 calls)
+     fftw         :  10511.32s CPU  21704.31s WALL ( 1953950 calls)
+     interpolate  :      0.05s CPU      0.10s WALL (       2 calls)
+     davcio       :      0.04s CPU      4.16s WALL (     200 calls)
+ 
+     Parallel routines
+ 
+     PWSCF        :      4h49m CPU      9h51m WALL
+
+ 
+   This run was terminated on:  23:37:19   1May2026            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

@@ -1,0 +1,495 @@
+
+     Program PWSCF v.7.3 starts on 12Mar2026 at 17:32:58 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    64 processors
+
+     MPI processes distributed on     4 nodes
+     244684 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from /tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/SCF/Ni3Pd1_111-SCF.in
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+     file Ni.upf: wavefunction(s)  4S 3D renormalized
+     file Pd.upf: wavefunction(s)  5S 4D renormalized
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+     Message from routine find_sym:
+     Not a group! Trying with lower acceptance parameter...
+     Message from routine find_sym:
+     Symmetry operations form a group
+ 
+     K-points division:     npool     =       8
+     R & G space division:  proc/nbgrp/npool/nimage =       8
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     one sub-group per band group will be used
+     scalapack distributed-memory algorithm (size of sub-group:  2*  2 procs)
+
+ 
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min         375     188     54               106317    37608    5906
+     Max         376     189     55               106344    37623    5933
+     Sum        3001    1507    433               850625   300931   47347
+ 
+     Using Slab Decomposition
+ 
+
+     Title: 
+     Ni3Pd1_111-SCF                                                             
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =       9.5206  a.u.
+     unit-cell volume          =    4789.0025 (a.u.)^3
+     number of atoms/cell      =           24
+     number of atomic types    =            2
+     number of electrons       =       240.00
+     number of Kohn-Sham states=          144
+     kinetic-energy cutoff     =      60.0000  Ry
+     charge density cutoff     =     480.0000  Ry
+     scf convergence threshold =      1.0E-10
+     mixing beta               =       0.2000
+     number of iterations used =           12  local-TF  mixing
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+
+     celldm(1)=   9.520593  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.500000   0.866025   0.000000 )  
+               a(3) = (   0.000000   0.000000   6.408000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000 -0.577350  0.000000 )  
+               b(2) = (  0.000000  1.154701  0.000000 )  
+               b(3) = (  0.000000  0.000000  0.156055 )  
+
+
+     PseudoPot. # 1 for Ni read from file:
+     /tmpu/isholek_g/isholek/MIGUEL/PP/PAW/Ni.upf
+     MD5 check sum: d88365a95a5e142bd87181c2c8b16588
+     Pseudo is Projector augmented-wave + core cor, Zval = 10.0
+     Generated using "atomic" code by A. Dal Corso  v.5.0.2 svn rev. 9415
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1195 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 2 for Pd read from file:
+     /tmpu/isholek_g/isholek/MIGUEL/PP/PAW/Pd.upf
+     MD5 check sum: e9d6f14fd83b79f8105499163af174c9
+     Pseudo is Projector augmented-wave + core cor, Zval = 10.0
+     Generated using "atomic" code by A. Dal Corso  v.5.0.2 svn rev. 9415
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1235 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     atomic species   valence    mass     pseudopotential
+     Ni               10.00    58.69340     Ni( 1.00)
+     Pd               10.00   106.42000     Pd( 1.00)
+
+     Starting magnetic structure 
+     atomic species   magnetization
+     Ni              0.650
+     Pd              0.100
+
+     No symmetry found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        Ni     tau(   1) = (   1.0000055   0.5773497   2.1833712  )
+         2        Ni     tau(   2) = (   0.2499946   0.1443334   2.1833775  )
+         3        Pd     tau(   3) = (   0.5000045   0.5773498   2.1833823  )
+         4        Ni     tau(   4) = (   0.7499961   0.1443432   2.1833870  )
+         5        Ni     tau(   5) = (   0.5000055   0.2886746   2.5916194  )
+         6        Ni     tau(   6) = (   1.2499946   0.7216837   2.5916258  )
+         7        Pd     tau(   7) = (   1.0000045   0.2886747   2.5916306  )
+         8        Ni     tau(   8) = (   0.7499961   0.7216934   2.5916353  )
+         9        Ni     tau(   9) = (   0.5000001   0.8656035   2.9996417  )
+        10        Ni     tau(  10) = (   0.7496345   0.4332248   2.9996403  )
+        11        Pd     tau(  11) = (   1.0000009   0.8660278   2.9988887  )
+        12        Ni     tau(  12) = (   1.2503687   0.4332260   2.9996406  )
+        13        Ni     tau(  13) = (   1.0000011   0.5775760   3.4076330  )
+        14        Ni     tau(  14) = (   0.2501945   0.1442245   3.4076341  )
+        15        Pd     tau(  15) = (   0.5000006   0.5773503   3.4103187  )
+        16        Ni     tau(  16) = (   0.7498054   0.1442258   3.4076350  )
+        17        Ni     tau(  17) = (   0.5000008   0.2852883   3.8164077  )
+        18        Ni     tau(  18) = (   1.2470663   0.7233808   3.8164079  )
+        19        Pd     tau(  19) = (   1.0000003   0.2886755   3.8139684  )
+        20        Ni     tau(  20) = (   0.7529338   0.7233824   3.8164085  )
+        21        Ni     tau(  21) = (   0.5000002   0.8590908   4.2179755  )
+        22        Ni     tau(  22) = (   0.7439943   0.4364798   4.2179755  )
+        23        Pd     tau(  23) = (   1.0000001   0.8660255   4.2390566  )
+        24        Ni     tau(  24) = (   1.2560056   0.4364803   4.2179754  )
+
+     --------------------------------------------
+     DFT-D3 Dispersion Correction (3-body terms):
+     --------------------------------------------
+       Reference C6 values for interpolation: 
+
+         atom   Coordination number   C6
+         Ni         0.000          1149.49
+         Ni         1.794           356.66
+         Ni         6.546           257.56
+         Ni         6.292           283.75
+         Pd         0.000          1217.01
+         Pd         1.863           573.90
+         Pd         5.710           531.75
+
+       Values used:
+
+         atom   Coordination number  R0_AB[au]  C6      C8
+         Ni         6.658            3.162    267.12  22382.86
+         Ni         6.659            3.162    267.12  22382.70
+         Pd         7.596            3.168    531.75  48720.73
+         Ni         6.659            3.162    267.12  22382.50
+         Ni         8.918            3.162    257.72  21594.70
+         Ni         8.918            3.162    257.72  21594.70
+         Pd        10.217            3.168    531.75  48720.73
+         Ni         8.918            3.162    257.72  21594.70
+         Ni         8.915            3.162    257.72  21594.77
+         Ni         8.915            3.162    257.72  21594.78
+         Pd        10.236            3.168    531.75  48720.73
+         Ni         8.915            3.162    257.72  21594.78
+         Ni         8.934            3.162    257.71  21594.30
+         Ni         8.934            3.162    257.71  21594.30
+         Pd        10.203            3.168    531.75  48720.73
+         Ni         8.934            3.162    257.71  21594.30
+         Ni         8.950            3.162    257.71  21593.91
+         Ni         8.950            3.162    257.71  21593.91
+         Pd        10.216            3.168    531.75  48720.73
+         Ni         8.950            3.162    257.71  21593.91
+         Ni         6.728            3.162    266.28  22312.48
+         Ni         6.728            3.162    266.28  22312.48
+         Pd         7.390            3.168    531.75  48720.73
+         Ni         6.728            3.162    266.28  22312.48
+
+         Molecular C6 ( Ry / a.u.^6 ) =    183959.60
+
+
+     number of k points=   256  Marzari-Vanderbilt smearing, width (Ry)=  0.0147
+
+     Number of k-points >= 100: set verbosity='high' to print them.
+
+     Dense  grid:   850625 G-vectors     FFT dimensions: (  72,  72, 432)
+
+     Smooth grid:   300931 G-vectors     FFT dimensions: (  48,  48, 320)
+
+     Estimated max dynamical RAM per process >     904.54 MB
+
+     Estimated total dynamical RAM >      52.27 GB
+ ----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D
+  The code is running with the 2D cutoff
+  Please refer to:
+  Sohier, T., Calandra, M., & Mauri, F. (2017), 
+  Density functional perturbation theory for gated two-dimensional heterostructu
+ res:
+  Theoretical developments and application to flexural phonons in graphene.
+  Physical Review B, 96(7), 75448. https://doi.org/10.1103/PhysRevB.96.075448
+ ----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D----2D
+
+     Atomic positions and unit cell read from directory:
+     /tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/SAVE/Ni3Pd1_111.save/
+ 
+
+     Check: negative core charge=   -0.000001
+     Generating pointlists ...
+     new r_m :   0.2013 (alat units)  1.9165 (a.u.) for type    1
+     new r_m :   0.2057 (alat units)  1.9580 (a.u.) for type    2
+
+     The initial density is read from file :
+     /tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/SAVE/Ni3Pd1_111.save/charge-density
+
+
+     negative rho (up, down):  2.470E-04 1.911E-04
+     Starting wfcs from file
+     Checking if some PAW data can be deallocated... 
+
+     total cpu time spent up to now is       35.0 secs
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.00E-05,  avg # of iterations =  1.0
+
+     Threshold (ethr) on eigenvalues was too large:
+     Diagonalizing with lowered threshold
+
+     Davidson diagonalization with overlap
+     ethr =  1.32E-10,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.469E-04 1.910E-04
+
+     total cpu time spent up to now is     1732.5 secs
+
+     total energy              =   -5330.90167323 Ry
+     estimated scf accuracy    <       0.00000032 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  2     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.33E-10,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.469E-04 1.910E-04
+
+     total cpu time spent up to now is     3195.0 secs
+
+     total energy              =   -5330.90167323 Ry
+     estimated scf accuracy    <       0.00000034 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  3     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.33E-10,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.469E-04 1.910E-04
+
+     total cpu time spent up to now is     4709.0 secs
+
+     total energy              =   -5330.90167324 Ry
+     estimated scf accuracy    <       0.00000003 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  4     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.23E-11,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.469E-04 1.910E-04
+
+     total cpu time spent up to now is     6240.8 secs
+
+     total energy              =   -5330.90167324 Ry
+     estimated scf accuracy    <       0.00000003 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  5     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.10E-11,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.469E-04 1.910E-04
+
+     total cpu time spent up to now is     7771.0 secs
+
+     total energy              =   -5330.90167324 Ry
+     estimated scf accuracy    <          7.1E-10 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  6     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  2.96E-13,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.468E-04 1.909E-04
+
+     total cpu time spent up to now is     9305.2 secs
+
+     total energy              =   -5330.90167324 Ry
+     estimated scf accuracy    <          1.9E-10 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     iteration #  7     ecut=    60.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+     ethr =  1.00E-13,  avg # of iterations =  1.0
+
+     negative rho (up, down):  2.470E-04 1.911E-04
+ 
+     Magnetic moment per site  (integrated on atomic sphere of radius R)
+     atom   1 (R=0.201)  charge=  8.5724  magn=  0.7897
+     atom   2 (R=0.201)  charge=  8.5724  magn=  0.7897
+     atom   3 (R=0.206)  charge=  7.9489  magn=  0.2795
+     atom   4 (R=0.201)  charge=  8.5724  magn=  0.7897
+     atom   5 (R=0.201)  charge=  8.6473  magn=  0.7880
+     atom   6 (R=0.201)  charge=  8.6473  magn=  0.7880
+     atom   7 (R=0.206)  charge=  7.9915  magn=  0.3351
+     atom   8 (R=0.201)  charge=  8.6473  magn=  0.7880
+     atom   9 (R=0.201)  charge=  8.6528  magn=  0.7460
+     atom  10 (R=0.201)  charge=  8.6528  magn=  0.7460
+     atom  11 (R=0.206)  charge=  7.9916  magn=  0.3181
+     atom  12 (R=0.201)  charge=  8.6528  magn=  0.7460
+     atom  13 (R=0.201)  charge=  8.6555  magn=  0.7433
+     atom  14 (R=0.201)  charge=  8.6555  magn=  0.7433
+     atom  15 (R=0.206)  charge=  7.9880  magn=  0.3187
+     atom  16 (R=0.201)  charge=  8.6555  magn=  0.7433
+     atom  17 (R=0.201)  charge=  8.6473  magn=  0.7857
+     atom  18 (R=0.201)  charge=  8.6473  magn=  0.7857
+     atom  19 (R=0.206)  charge=  7.9929  magn=  0.3306
+     atom  20 (R=0.201)  charge=  8.6473  magn=  0.7857
+     atom  21 (R=0.201)  charge=  8.5801  magn=  0.7901
+     atom  22 (R=0.201)  charge=  8.5801  magn=  0.7901
+     atom  23 (R=0.206)  charge=  7.9385  magn=  0.2696
+     atom  24 (R=0.201)  charge=  8.5801  magn=  0.7901
+
+     total cpu time spent up to now is    10864.1 secs
+
+     End of self-consistent calculation
+
+     Number of k-points >= 100: set verbosity='high' to print the bands.
+
+     the Fermi energy is    -5.0599 ev
+
+!    total energy              =   -5330.90167324 Ry
+     total all-electron energy =   -115302.647819 Ry
+     estimated scf accuracy    <          8.9E-11 Ry
+     smearing contrib. (-TS)   =      -0.00247700 Ry
+     internal energy E=F+TS    =   -5330.89919624 Ry
+
+     The total energy is F=E-TS. E is the sum of the following terms:
+     one-electron contribution =  -69736.94233419 Ry
+     hartree contribution      =   35063.24852929 Ry
+     xc contribution           =    -946.49844498 Ry
+     ewald contribution        =   33362.88824428 Ry
+     DFT-D3 Dispersion         =      -2.01687715 Ry
+     one-center paw contrib.   =   -3071.57831349 Ry
+
+     total magnetization       =    14.94 Bohr mag/cell
+     absolute magnetization    =    16.85 Bohr mag/cell
+
+     convergence has been achieved in   7 iterations
+
+     negative rho (up, down):  2.470E-04 1.911E-04
+
+     Forces acting on atoms (cartesian axes, Ry/au):
+
+     atom    1 type  1   force =    -0.00000558    0.01350346    0.00376939
+     atom    2 type  1   force =     0.01170271   -0.00674311    0.00375790
+     atom    3 type  2   force =    -0.00000986    0.00000622   -0.01842937
+     atom    4 type  1   force =    -0.01168736   -0.00676654    0.00374788
+     atom    5 type  1   force =    -0.00000620    0.00162347    0.00175880
+     atom    6 type  1   force =     0.00141754   -0.00080051    0.00174308
+     atom    7 type  2   force =    -0.00001267    0.00000652    0.00458020
+     atom    8 type  1   force =    -0.00139931   -0.00083102    0.00172888
+     atom    9 type  1   force =    -0.00000131   -0.00002254    0.00013941
+     atom   10 type  1   force =    -0.00001786    0.00001292    0.00013813
+     atom   11 type  2   force =     0.00000046   -0.00000010   -0.00022302
+     atom   12 type  1   force =     0.00001890    0.00001022    0.00013686
+     atom   13 type  1   force =    -0.00000145    0.00047082   -0.00057906
+     atom   14 type  1   force =     0.00040995   -0.00023336   -0.00058024
+     atom   15 type  2   force =     0.00000021    0.00000001   -0.00053524
+     atom   16 type  1   force =    -0.00040829   -0.00023680   -0.00058192
+     atom   17 type  1   force =    -0.00000129    0.00030808    0.00007123
+     atom   18 type  1   force =     0.00026860   -0.00015214    0.00007063
+     atom   19 type  2   force =    -0.00000019   -0.00000023   -0.00048116
+     atom   20 type  1   force =    -0.00026726   -0.00015570    0.00006973
+     atom   21 type  1   force =    -0.00000018   -0.00028079    0.00007819
+     atom   22 type  1   force =    -0.00024296    0.00014103    0.00007853
+     atom   23 type  2   force =    -0.00000014    0.00000010   -0.00053761
+     atom   24 type  1   force =     0.00024352    0.00014000    0.00007879
+
+     Total force =     0.001775     Total SCF correction =     0.000038
+
+
+     Computing stress (Cartesian axis) and pressure
+
+
+     negative rho (up, down):  2.470E-04 1.911E-04
+          total   stress  (Ry/bohr**3)                   (kbar)     P=       -5.40
+  -0.00005557   0.00000000   0.00000000           -8.17        0.00        0.00
+   0.00000000  -0.00005557   0.00000000            0.00       -8.17        0.00
+   0.00000000   0.00000000   0.00000097            0.00        0.00        0.14
+
+
+     Writing all to output data dir /tmpu/isholek_g/isholek/MIGUEL/QE/111_2x2/SAVE/Ni3Pd1_111.save/ :
+     XML data file, charge density, pseudopotentials, collected wavefunctions
+ 
+     init_run     :     10.09s CPU     34.44s WALL (       1 calls)
+     electrons    :   5739.14s CPU  10829.71s WALL (       1 calls)
+     forces       :     41.63s CPU     76.04s WALL (       1 calls)
+     force_dftd3  :      1.71s CPU      1.83s WALL (       1 calls)
+     stress       :    582.01s CPU   1130.48s WALL (       1 calls)
+     stres_dftd3  :      1.06s CPU      1.95s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      4.56s CPU     27.91s WALL (       1 calls)
+     potinit      :      0.78s CPU      1.35s WALL (       1 calls)
+     hinit0       :      1.47s CPU      1.69s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :   4638.63s CPU   8750.26s WALL (       8 calls)
+     sum_band     :   1069.88s CPU   2027.39s WALL (       8 calls)
+     v_of_rho     :      5.32s CPU      7.60s WALL (       8 calls)
+     newd         :      2.19s CPU      3.40s WALL (       8 calls)
+     PAW_pot      :      5.95s CPU      9.46s WALL (       8 calls)
+     mix_rho      :     14.57s CPU     26.47s WALL (       8 calls)
+     energy_dftd3 :      0.06s CPU      0.06s WALL (       1 calls)
+
+     Called by c_bands:
+     init_us_2    :     12.18s CPU     20.40s WALL (    1152 calls)
+     init_us_2:cp :     12.17s CPU     20.39s WALL (    1152 calls)
+     cegterg      :   2286.88s CPU   4253.46s WALL (     512 calls)
+
+     Called by *egterg:
+     cdiaghg      :    130.26s CPU    249.00s WALL (     899 calls)
+     h_psi        :   1866.91s CPU   3468.44s WALL (    1027 calls)
+     s_psi        :     73.56s CPU    136.26s WALL (    1027 calls)
+     g_psi        :      2.22s CPU      3.70s WALL (     515 calls)
+
+     Called by h_psi:
+     h_psi:calbec :     91.50s CPU    167.32s WALL (    1027 calls)
+     vloc_psi     :   1698.26s CPU   3155.51s WALL (    1027 calls)
+     add_vuspsi   :     74.73s CPU    136.79s WALL (    1027 calls)
+
+     General routines
+     calbec       :    181.71s CPU    334.28s WALL (    1859 calls)
+     fft          :      4.55s CPU      6.72s WALL (     240 calls)
+     ffts         :      3.94s CPU      7.95s WALL (     770 calls)
+     fftw         :   1964.63s CPU   3699.18s WALL (  368648 calls)
+     interpolate  :      0.30s CPU      0.47s WALL (      16 calls)
+ 
+     Parallel routines
+ 
+     PWSCF        :      1h56m CPU      3h41m WALL
+
+ 
+   This run was terminated on:  21:14:16  12Mar2026            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

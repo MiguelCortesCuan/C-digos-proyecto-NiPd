@@ -1,0 +1,73 @@
+#!/bin/bash
+#BSUB -J H
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -q q_hpc
+#BSUB -n 24
+#BSUB -R "span[ptile=24]"
+#BSUB -B
+#BSUB -N
+#BSUB -u ccuan@pceim.unam.mx
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+
+# Definir el nombre del material y número de núcleos
+material="H"
+pseudo_dir="/tmpu/mdach_g/mdach/PP"
+variable="1"
+
+    cat > ${material}_${variable}.in << EOF
+&CONTROL
+  title         = '${material}_${variable}',
+  calculation   = 'scf',
+  outdir        = './',
+  pseudo_dir    = '${pseudo_dir}',
+  prefix        = '${material}_${variable}',
+  tstress       = .true.,
+  tprnfor       = .true.,
+/
+&SYSTEM
+  ibrav              = 0,
+  nat                = 1,
+  ntyp               = 1,
+  input_dft          = 'PBE',
+  assume_isolated    = 'martyna-tuckerman',
+  ecutwfc            = 60.0,
+  ecutrho            = 480.0,
+  occupations        = 'fixed',
+  nspin              = 2,
+  tot_magnetization  = 1.0,
+  nosym              = .true.,
+  noinv              = .true.,
+/
+&ELECTRONS
+  conv_thr        = 6.4d-9,
+  mixing_mode     = 'plain',
+  mixing_beta     = 0.30,
+  mixing_ndim     = 12,
+  diagonalization = 'david',
+  electron_maxstep = 200,
+/
+K_POINTS {gamma}
+
+ATOMIC_SPECIES
+H   1.008  H.upf
+
+ATOMIC_POSITIONS {angstrom}
+H   10.0   10.0   10.0
+
+CELL_PARAMETERS {angstrom}
+20.0   0.0   0.0
+ 0.0  20.0   0.0
+ 0.0   0.0  20.0
+EOF
+
+    # Execute Quantum Espresso
+    mpirun -np 24 pw.x -inp ${material}_${variable}.in > ${material}_${variable}.out
+

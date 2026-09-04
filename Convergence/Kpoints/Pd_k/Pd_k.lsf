@@ -1,0 +1,97 @@
+#!/bin/bash
+#BSUB -J Pd_k
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -q q_hpc
+#BSUB -n 30
+#BSUB -R "span[hosts=1]"
+#BSUB -B
+#BSUB -N
+#BSUB -u ccuan@pceim.unam.mx
+#
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+# Definir el nombre del material y número de núcleos
+material="Pd_k"
+cores="30"
+pseudo_dir="/tmpu/mdach_g/mdach/PP"
+
+######## Generación de archivos de entrada y ejecución de cálculos #########
+for variable in $(seq 1 1 25)  # Modify step size for ecut, lattice, or kpoints
+do
+    k=$variable
+
+    cat > ${material}_${variable}.in << EOF
+&CONTROL
+    title         = "${material}_${variable}"
+    calculation   = "scf"
+    max_seconds   = 8.64000e+99
+    etot_conv_thr = 7.4d-8
+    forc_conv_thr = 7.8d-4
+    nstep         = 512
+    pseudo_dir    = "${pseudo_dir}"
+    prefix        = "${material}_${variable}"
+    outdir        = '.'
+    restart_mode  = 'from_scratch'
+/
+
+&SYSTEM
+    celldm(1)                 =  6.50254759
+    constrained_magnetization = "none"
+    degauss                   =  0.0146997171
+    ibrav                     =  0
+    nat                       =  4
+    nspin                     =  2
+    ntyp                      =  1
+    occupations               = "smearing"
+    smearing                  = "methfessel-paxton"
+    starting_magnetization(1) =  2.00000e-01
+    vdw_corr                  =  "DFT-D3"
+    dftd3_version             =  6
+    input_dft                 = 'PBE'
+    ecutrho                   =  480
+    ecutwfc                   =  60
+/
+
+&ELECTRONS
+    conv_thr         =  6.40000e-09
+    diago_david_ndim = 12
+    diagonalization  = "david"
+    electron_maxstep = 512
+    mixing_beta      =  0.5
+    mixing_mode      = "local-TF"
+    mixing_ndim      = 10
+    startingpot      = "atomic"
+    startingwfc      = "atomic"
+/
+
+K_POINTS {automatic}
+${k} ${k} ${k}  0 0 0
+
+ATOMIC_SPECIES
+Pd    106.42000  Pd.upf
+
+CELL_PARAMETERS (alat)
+   0.999954749   0.000000000   0.000000000
+   0.000000000   0.999954749   0.000000000
+   0.000000000   0.000000000   0.999954749
+
+ATOMIC_POSITIONS (angstrom)
+Pd              -0.0187650989       -0.0187650989       -0.0187650989
+Pd              -0.0187706262        1.8973268750        1.8973268750
+Pd               1.8973268750       -0.0187706262        1.8973268750
+Pd               1.8973268750        1.8973268750       -0.0187706262
+EOF
+
+    # Execute Quantum Espresso
+    mpirun -np $cores pw.x < ${material}_${variable}.in > ${material}_${variable}.out
+
+done
+
+

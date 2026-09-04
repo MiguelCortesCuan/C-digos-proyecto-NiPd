@@ -1,0 +1,86 @@
+&CONTROL
+  title           = 'Ni1Pd3_111-H_fcc_1-relax',
+  prefix          = 'Ni1Pd3_111-H_fcc_1',
+  outdir          = '/tmpu/isholek_g/isholek/MIGUEL/QE/Hydrogen/111_2x2/SAVE',
+  restart_mode    = 'from_scratch',
+  etot_conv_thr   = 1.764d-05,
+  forc_conv_thr   = 7.800d-04,
+  calculation     = 'relax',
+  tstress         = .true.,
+  tprnfor         = .true.,
+  pseudo_dir      = '/tmpu/isholek_g/isholek/MIGUEL/PP/PAW',
+/
+
+&SYSTEM
+  ibrav                    = 0,
+  nat                      = 25,
+  ntyp                     = 3,
+  nspin                    = 2,
+  ecutwfc                  = 60,
+  ecutrho                  = 480,
+  occupations              = 'smearing',
+  constrained_magnetization = 'none',
+  smearing                 = 'mv',
+  input_dft                = 'PBE',
+  assume_isolated          = '2D',
+  nosym                    = .true.,
+  noinv                    = .true.,
+  degauss                  = 0.0146997171,
+  vdw_corr                 = 'DFT-D3',
+  dftd3_version            = 6,
+  starting_magnetization(1)= 0.65,
+  starting_magnetization(2)= 0.1,
+/
+
+&ELECTRONS
+  conv_thr         = 1.0d-08,
+  diagonalization  = 'david',
+  electron_maxstep = 201,
+  mixing_beta      = 0.2,
+  mixing_mode      = 'local-TF',
+  mixing_ndim      = 12,
+/
+
+&IONS
+  ion_dynamics = 'bfgs',
+/
+
+ATOMIC_SPECIES
+Ni     58.69340  Ni.upf
+Pd    106.42000  Pd.upf
+H       1.00794  H.upf
+
+CELL_PARAMETERS (angstrom)
+  5.31719907725  0.00000000000  0.00000000000
+  2.65859953862  4.60482947787  0.00000000000
+  0.00000000000  0.00000000000 32.85376361491
+
+ATOMIC_POSITIONS (angstrom)
+Ni               5.3171990772        3.0698863186       11.0000000000    0   0   0
+Pd               2.6585995386        3.0698851333       11.0000764482    0   0   0
+Pd               3.9878982814        0.7674721723       11.0000764482    0   0   0
+Pd               1.3293007958        0.7674721723       11.0000764482    0   0   0
+Ni               2.6585995386        1.5349431593       13.1707374333    0   0   0
+Pd               3.9878982814        3.8373584909       13.1708138815    0   0   0
+Pd               5.3171990772        1.5349419740       13.1708138815    0   0   0
+Pd               6.6464998731        3.8373584909       13.1708138815    0   0   0
+Ni               0.0000000522       -0.0000000653       15.3356914712
+Pd               5.3171990683        4.6052780842       15.3381504554
+Pd               3.9875107455        2.3021904063       15.3381505074
+Pd               6.6468872440        2.3021904678       15.3381506009
+Ni               5.3171990336        3.0698862396       17.5106440916
+Pd               3.9872235945        0.7678615739       17.5098649619
+Pd               2.6585995639        3.0691058277       17.5098651857
+Pd               1.3299756157        0.7678616131       17.5098650926
+Ni               2.6585994392        1.5349431715       19.6901367150
+Pd               3.9934328358        3.8341631257       19.6741840665
+Pd               5.3171989876        1.5413328928       19.6741838591
+Pd               6.6409651201        3.8341631591       19.6741840374
+Ni              -0.0000002479        0.0000004292       21.7690912958
+Pd               5.3171988390        4.6166325024       21.8796596048
+Pd               3.9776774860        2.2965134952       21.8796593946
+Pd               6.6567202487        2.2965135570       21.8796594900
+H                2.6585994392        1.5349431715       22.8796594900
+
+K_POINTS automatic
+  10 10 1  0 0 0

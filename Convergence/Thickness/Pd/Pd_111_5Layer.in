@@ -1,0 +1,80 @@
+&CONTROL
+  title           = 'Pd_111_5Layer',
+  calculation     = 'relax',
+  tstress         = .true.,
+  tprnfor         = .true.,
+  pseudo_dir      = '/tmpu/isholek_g/isholek/MIGUEL/PP',
+  prefix          = 'Pd_111_5Layer',
+  outdir          = '.',
+  restart_mode    = 'from_scratch',
+  etot_conv_thr   = 154.35d-07
+  forc_conv_thr   = 7.8d-4
+/
+
+&SYSTEM
+  ibrav           =  0,
+  nat             =  20,
+  ntyp            =  2,
+  nspin           =  2,
+  ecutwfc         =  60,
+  ecutrho         =  480,
+  occupations     = 'smearing',
+  smearing        = 'mv',
+  input_dft       = 'PBE',
+  assume_isolated = '2D',
+  nosym           = .TRUE.
+  degauss         =  0.0146997171,
+  vdw_corr        = 'DFT-D3',
+  dftd3_version   =  6,
+  starting_magnetization(1) = 0.65,
+  starting_magnetization(2) = 1,
+/
+
+&ELECTRONS
+  conv_thr         = 1.0d-08
+  diagonalization  = "david"
+  electron_maxstep = 201
+  mixing_beta      = 0.2
+  mixing_mode      = "local-TF"
+  mixing_ndim      = 12
+/
+
+&IONS
+  ion_dynamics  = 'bfgs'
+/
+
+CELL_PARAMETERS {angstrom}
+  5.41942656251 0.00000000000 0.00000000000
+  2.70971328125 4.69336107707 0.00000000000
+  0.00000000000 0.00000000000 33.06236186076
+
+K_POINTS {automatic}
+  10 10 1  0 0 0
+
+ATOMIC_SPECIES
+  Pd   106.4200   Pd.upf
+  H      1.00784   H.upf
+
+ATOMIC_POSITIONS (angstrom)
+Pd               4.0645645626        0.7822299404       11.0000000000    0   0   0
+Pd               1.3548619999        0.7822299404       11.0000000000    0   0   0
+Pd               2.7097132812        3.1289011964       11.0000000000    0   0   0
+Pd               5.4194265625        3.1289073847       11.0000037136    0   0   0
+Pd               4.0645645626        3.9111373251       13.2124716294    0   0   0
+Pd               5.4194265625        1.5644475040       13.2124716294    0   0   0
+Pd               6.7742885624        3.9111373251       13.2124716294    0   0   0
+Pd               2.7097132813        1.5644536924       13.2124753430    0   0   0
+Pd               5.4194266048        4.6933603835       15.4118745340
+Pd               6.7744700224        2.3467887492       15.4172531903
+Pd               4.0643831458        2.3467887746       15.4172531962
+Pd               5.4194265522       -0.0002163753       15.4172560970
+Pd               4.0643787309        0.7821163303       17.6224939867
+Pd               2.7097133307        3.1289066895       17.6251804565
+Pd               1.3550479454        0.7821163339       17.6224939211
+Pd               5.4194266231        3.1291275643       17.6224936272
+Pd               4.0638599952        3.9107235367       19.8322101127
+Pd               5.4194266167        1.5644529416       19.8400918293
+Pd               6.7749931779        3.9107235119       19.8322101763
+Pd               2.7097133141        1.5652727871       19.8322108578
+
+

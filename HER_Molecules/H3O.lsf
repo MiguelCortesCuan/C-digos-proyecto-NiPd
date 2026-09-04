@@ -1,0 +1,80 @@
+#!/bin/bash
+#BSUB -J H3O
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -q q_hpc
+#BSUB -n 24
+#BSUB -R "span[ptile=24]"
+#BSUB -B
+#BSUB -N
+#BSUB -u ccuan@pceim.unam.mx
+
+module load tbb/2021.6.0
+module load compiler-rt/2022.1.0
+module load intel/2022.1.0
+module load mpi/intel-2021.6.0
+module load mkl/2022.1.0
+module load quantum/7.3
+
+
+# Definir el nombre del material y número de núcleos
+material="H3O"
+pseudo_dir="/tmpu/mdach_g/mdach/PP"
+variable="1"
+
+    cat > ${material}_${variable}.in << EOF
+&CONTROL
+  title         = '${material}_${variable}',
+  calculation   = 'relax',
+  outdir        = './',
+  pseudo_dir    = '${pseudo_dir}',
+  prefix        = '${material}_${variable}',
+  tstress       = .true.,
+  tprnfor       = .true.,
+  etot_conv_thr = 1.7639675d-06,
+  forc_conv_thr = 7.78d-4,
+/
+
+&SYSTEM
+  ibrav              = 1,
+  a                  = 20.0,
+  nat                = 4,
+  ntyp               = 2,
+  tot_charge         = 1,
+  input_dft          = 'PBE',
+  assume_isolated    = 'martyna-tuckerman',
+  ecutwfc            = 60.0,
+  ecutrho            = 480.0,
+  occupations        = 'fixed',
+  vdw_corr           = 'DFT-D3',
+  dftd3_version      = 6,
+/
+
+&ELECTRONS
+  conv_thr        = 6.4d-9
+  mixing_mode     = 'plain'
+  mixing_beta     = 0.30
+  mixing_ndim     = 12
+  diagonalization = 'david'
+  electron_maxstep = 200
+/
+
+&IONS
+/
+
+K_POINTS {gamma}
+
+ATOMIC_SPECIES
+  O  15.999  O.upf
+  H   1.008  H.upf
+
+ATOMIC_POSITIONS (bohr)
+  O  19.322957  18.963303  18.704149
+  H  17.687833  18.761281  17.770457
+  H  20.404539  20.373555  18.049899
+  H  19.129583  18.962953  20.588093
+EOF
+
+# Execute Quantum Espresso
+    mpirun -np 24 pw.x -inp ${material}_${variable}.in > ${material}_${variable}.out
+

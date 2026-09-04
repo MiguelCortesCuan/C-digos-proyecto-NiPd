@@ -1,0 +1,72 @@
+&CONTROL
+  title           = 'Ni_111_3Layer',
+  calculation     = 'relax',
+  tstress         = .true.,
+  tprnfor         = .true.,
+  pseudo_dir      = '/tmpu/isholek_g/isholek/MIGUEL/PP',
+  prefix          = 'Ni_111_3Layer',
+  outdir          = '.',
+  restart_mode    = 'from_scratch',
+  etot_conv_thr   = 95.55d-07
+  forc_conv_thr   = 7.8d-4
+/
+
+&SYSTEM
+  ibrav           =  0,
+  nat             =  12,
+  ntyp            =  2,
+  nspin           =  2,
+  ecutwfc         =  60,
+  ecutrho         =  480,
+  occupations     = 'smearing',
+  smearing        = 'mv',
+  input_dft       = 'PBE',
+  assume_isolated = '2D',
+  nosym           = .TRUE.
+  degauss         =  0.0146997171,
+  vdw_corr        = 'DFT-D3',
+  dftd3_version   =  6,
+  starting_magnetization(1) = 0.65,
+  starting_magnetization(2) = 1,
+/
+
+&ELECTRONS
+  conv_thr         = 1.0d-08
+  diagonalization  = "david"
+  electron_maxstep = 201
+  mixing_beta      = 0.2
+  mixing_mode      = "local-TF"
+  mixing_ndim      = 12
+/
+
+&IONS
+  ion_dynamics  = 'bfgs'
+/
+
+CELL_PARAMETERS {angstrom}
+  4.86542906019 0.00000000000 0.00000000000
+  2.43271453010 4.21358516644 0.00000000000
+  0.00000000000 0.00000000000 31.93152221841
+
+K_POINTS {automatic}
+  10 10 1  0 0 0
+
+ATOMIC_SPECIES
+  Ni    58.69340  Ni.upf
+  H      1.00784   H.upf
+
+ATOMIC_POSITIONS (angstrom)
+Ni               4.8654290602        2.8090567776       11.0000000000    0   0   0
+Ni               1.2163587666        0.7022650613       11.0000067374    0   0   0
+Ni               2.4327145301        2.8090550438       11.0000067374    0   0   0
+Ni               3.6490702936        0.7022650613       11.0000067374    0   0   0
+Ni               2.4327145301        1.4045283888       12.9863030962    0   0   0
+Ni               6.0817878268        3.5113218389       12.9863098336    0   0   0
+Ni               4.8654290602        1.4045266550       12.9863098336    0   0   0
+Ni               3.6490702936        3.5113218389       12.9863098336    0   0   0
+Ni               2.4327147368        4.2135848083       14.9720522980
+Ni               3.6490718173        2.1067929453       14.9720560241
+Ni               6.0817860901        2.1067930772       14.9720564448
+Ni               4.8654288947        4.2135846682       14.9720558592
+
+
